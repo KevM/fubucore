@@ -5,16 +5,23 @@ namespace FubuCore.CommandLine
     [AttributeUsage(AttributeTargets.Property)]
     public class FlagAliasAttribute : Attribute
     {
-        private readonly string _alias;
+        private readonly string _longAlias;
+        private readonly char _oneLetterAlias;
 
-        public FlagAliasAttribute(string alias)
+        public FlagAliasAttribute(string longAlias, char oneLetterAlias)
         {
-            _alias = alias;
+            _longAlias = longAlias;
+            _oneLetterAlias = oneLetterAlias;
         }
 
-        public string Alias
+        public string LongAlias
         {
-            get { return _alias; }
+            get { return _longAlias; }
+        }
+
+        public char OneLetterAlias
+        {
+            get { return _oneLetterAlias; }
         }
     }
 }

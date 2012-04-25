@@ -29,6 +29,14 @@ namespace FubuCore.Binding
             return _converter.FromString<T>(bindingValue.RawValue.ToString());
         }
 
+        public object ValueAs(Type type, string name)
+        {
+            var bindingValue = RawValue(name);
+            if (bindingValue == null || bindingValue.RawValue == null) return null;
+
+            return _converter.FromString(bindingValue.RawValue.ToString(), type);
+        }
+
         public bool ValueAs<T>(string name, Action<T> continuation)
         {
             return RawValue(name, value =>
@@ -36,6 +44,18 @@ namespace FubuCore.Binding
                 if (value.RawValue != null)
                 {
                     var convertedValue = _converter.FromString<T>(value.RawValue.ToString());
+                    continuation(convertedValue);
+                }
+            });
+        }
+
+        public bool ValueAs(Type type, string name, Action<object> continuation)
+        {
+            return RawValue(name, value =>
+            {
+                if (value.RawValue != null)
+                {
+                    var convertedValue = _converter.FromString(value.RawValue.ToString(), type);
                     continuation(convertedValue);
                 }
             });
