@@ -24,14 +24,19 @@ namespace FubuCore.Conversion
             get { return _text; }
         }
 
-        public IConversionRequest AnotherRequest(string text)
+    	public IConversionRequest AnotherRequest(string text)
         {
             return new ConversionRequest(text, _finder);
         }
 
-        public T Get<T>()
+    	public T Get<T>()
         {
             return (T) _finder(typeof (T));
         }
+
+    	public object Get(Type type)
+    	{
+    		return _finder(type);
+    	}
     }
 }

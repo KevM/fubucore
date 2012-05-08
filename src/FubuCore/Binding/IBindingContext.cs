@@ -73,9 +73,16 @@ namespace FubuCore.Binding
         /// <summary>
         /// Service locator method to the IoC container for the current request
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Generic type of the class to pull from the container</typeparam>
         /// <returns></returns>
         T Service<T>();
+
+		/// <summary>
+		/// Service locator method to the IoC container for the current request
+		/// </summary>
+		/// <param name="type">Type of the class to pull from the container.</param>
+		/// <returns></returns>
+		object Service(Type type);
 
         /// <summary>
         /// Shortcut to get converted data from the raw request by name

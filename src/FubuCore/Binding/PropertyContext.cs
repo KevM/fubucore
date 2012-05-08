@@ -31,7 +31,12 @@ namespace FubuCore.Binding
             return _parent.Service<T>();
         }
 
-        IConversionRequest IConversionRequest.AnotherRequest(string text)
+		object IConversionRequest.Get(Type type)
+		{
+			return _parent.Service(type);
+		}
+
+    	IConversionRequest IConversionRequest.AnotherRequest(string text)
         {
             return new ConversionRequest(text, Service);
         }
